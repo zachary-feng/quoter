@@ -1,0 +1,19 @@
+<h1> Please enter a memorable quote:</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'feed:index' %}" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit" />
+</form>
+
+{% if all_quotes %}
+    <ul>
+        {% for quote in all_quotes %}
+        <li> "{{ quote.quote }}" <br> by {{ quote.person }} on {{ quote.time }} </li><br>
+        {% endfor %}
+    </ul>
+{% else %}
+    <h2>No quotes are available.</h2>
+{% endif %}
